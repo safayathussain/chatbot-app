@@ -17,7 +17,7 @@ const SelectChat = ({chat, submitFunc}) => {
   };
   return (
     <div>
-      <div className={`mt-5 ${auth === 'ai' && 'flex justify-end'}`}>
+      <div className={`mt-5 ${auth !== 'ai' && 'flex justify-end'}`}>
         <div className='p-3 bg-lime-500 w-max max-w-[250px] rounded-md'>
           <p className='text-black text-sm mb-3'>{msg}:</p>
           <div className='bg-white p-2 rounded-md'>
