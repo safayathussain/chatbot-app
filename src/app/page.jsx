@@ -7,6 +7,7 @@ import Chat from './components/Chat';
 import SelectChat from './components/SelectChat';
 import YesNoChat from './components/YesNoChat';
 import { useEffect, useRef, useState } from 'react';
+import RangeChat from './components/RangeChat';
 export default function Home() {
   const [liked, setLiked] = useState(false)
   const [disliked, setDisliked] = useState(false)
@@ -14,7 +15,23 @@ export default function Home() {
   const [myChatsCount, setMyChatsCount] = useState(0)
   const [msgInput, setMsgInput] = useState('')
   const chatTrackRef = useRef(null);
-  const getResponse = (type) => {
+  const staticQues = [
+    'What is your date of birth?',
+    'Can you provide a safe telephone number ?',
+    'Can you provide a safe email address ?',
+    'Please use the slider to select priority.',
+    'Please select which sectors of law your issue pertains to',
+    'Briefly explain the breakdown of assets and liabilities of both parties.',
+    'What is the annual salary of each party involved, this should include all bonuses and other revenue sources?',
+    'Were there any financial responsibilities that were assigned to each party? If so, were they fulfilled?',
+    'Were there or are there any joint accounts ?',
+    'Please provide more information to help us better understand your situation.',
+    'Please attach any relevant images or files.'
+  ]
+  const getResponse = (type, msg = '', options = []) => {
+    if (myChatsCount === 5) {
+
+    }
     setTimeout(() => {
       if (type === 'yesNo') {
         setChats(prevChats => {
@@ -30,7 +47,8 @@ export default function Home() {
           const newChats = [...prevChats, {
             msg: 'Select your issues',
             msgType: 'select',
-            options: ['Domestic Abuse', 'Divorce & separation'],
+            // options: ['Domestic Abuse', 'Divorce & separation'],
+            options,
             auth: 'ai'
           }];
           return newChats;
@@ -39,13 +57,13 @@ export default function Home() {
       } else {
         setChats(prevChats => {
           const newChats = [...prevChats, {
-            msg: 'Hope you enjoying',
+            msg,
             auth: 'ai'
           }];
           return newChats;
         });
       }
-    }, 1000);
+    }, 200);
   }
   const sendChat = (msg) => {
     setChats(prevChats => {
@@ -54,21 +72,68 @@ export default function Home() {
     });
     setMsgInput('')
     setMyChatsCount(myChatsCount + 1)
-    if ((Math.floor(Math.random() * 10)) / 2 === 0) {
-      getResponse('select')
-    } else if ((Math.floor(Math.random() * 10)) / 3 === 0) {
-      getResponse('yesNo')
-    } else {
-      getResponse()
+    // if ((Math.floor(Math.random() * 10)) / 2 === 0) {
+    //   getResponse('select')
+    // } else if ((Math.floor(Math.random() * 10)) / 3 === 0) {
+    //   getResponse('yesNo')
+    // } else {
+    //   getResponse()
+    // }
+
+    if (myChatsCount < 11) {
+      getResponse('', staticQues[myChatsCount])
+      if (myChatsCount === 4) {
+        setTimeout(() => {
+          setChats(prevChats => {
+            const newChats = [...prevChats, {
+              msg: 'Select your issues',
+              msgType: 'select',
+              options: ['Domestic Abuse', 'Divorce & separation'],
+              // options,
+              auth: 'ai'
+            }];
+            return newChats;
+          });
+
+        }, 500);
+      }
+      if (myChatsCount === 3) {
+        setTimeout(() => {
+
+          setChats(prevChats => {
+            const newChats = [...prevChats, {
+              msg: 'Select your issues',
+              msgType: 'range',
+              range: [1, 10],
+              auth: 'ai'
+            }];
+            return newChats;
+          });
+        }, 500);
+      }
+      if (myChatsCount === 8) {
+        setTimeout(() => {
+
+          setChats(prevChats => {
+            const newChats = [...prevChats, {
+              msgType: 'yesNo',
+              msg: 'please select yes or no',
+              auth: 'me'
+            }];
+            return newChats;
+          });
+        }, 500);
+      }
+      console.log(myChatsCount)
     }
   }
   const handleSelectInput = (items) => {
     console.log(items)
-    getResponse('yesNo')
+    // getResponse('yesNo')
   }
   const handleYesNoInput = (data) => {
     console.log(data)
-    getResponse('select')
+    // getResponse('select')
   }
   useEffect(() => {
     // Scroll to the bottom when messages change
@@ -119,19 +184,45 @@ export default function Home() {
                 return <SelectChat key={i} chat={chat} submitFunc={handleSelectInput} />
               } else if (chat.msgType === 'yesNo') {
                 return <YesNoChat key={i} submitFunc={handleYesNoInput} />
+              } else if (chat.msgType === 'range') {
+                return <RangeChat key={i} chat={chat} />
               } else {
                 return <Chat key={i} chat={chat} />
               }
             })
           }
-          <div className='fixed bottom-4 bg-gray-200 -ml-5 w-full max-w-[500px] '>
-            <hr />
-            <div className='flex items-center '>
-              <input type="text" value={msgInput} onChange={(e) => setMsgInput(e.target.value)} name="" id="" className='p-3 w-full bg-gray-200 focus:outline-none text-gray-600' placeholder='Write a message' />
-              <PiPaperPlaneRightFill color='#2563eb' size={30} className='mr-7' onClick={() => sendChat(msgInput)} />
+
+          {/* main */}
+          {/* {
+            chats.map((chat, i) => {
+              if (chat.msgType === 'select') {
+                return <SelectChat key={i} chat={chat} submitFunc={handleSelectInput} />
+              } else if (chat.msgType === 'yesNo') {
+                return <YesNoChat key={i} submitFunc={handleYesNoInput} />
+              } else {
+                return <Chat key={i} chat={chat} />
+              }
+            })
+          } */}
+          {
+            myChatsCount === 12 &&
+            <div className='flex mb-2 mt-10 justify-center'>
+              <button className='text-sm px-2 py-1 rounded-sm bg-gray-300 text-black'>Submit</button>
             </div>
-            <hr />
-          </div>
+          }
+          {
+            myChatsCount === 12 ? <div className='text-black p-5 text-center bg-gray-200 fixed bottom-0 max-w-[500px] -ml-5 w-full'>
+              Powered by Team17
+            </div> :
+              <div className='fixed bottom-4 bg-gray-200 -ml-5 w-full max-w-[500px] '>
+                <hr />
+                <div className='flex items-center '>
+                  <input type="text" value={msgInput} onChange={(e) => setMsgInput(e.target.value)} name="" id="" className='p-3 w-full bg-gray-200 focus:outline-none text-gray-600' placeholder='Write a message' />
+                  <PiPaperPlaneRightFill color='#2563eb' size={30} className='mr-7' onClick={() => sendChat(msgInput)} />
+                </div>
+                <hr />
+              </div>
+          }
         </div>
       </div>
     </div>

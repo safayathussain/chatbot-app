@@ -17,7 +17,7 @@ const SelectChat = ({chat, submitFunc}) => {
   };
   return (
     <div>
-      <div className={`mt-5 ${auth !== 'ai' && 'flex justify-end'}`}>
+      <div className={`mt-5 flex justify-end`}>
         <div className='p-3 bg-lime-500 w-max max-w-[250px] rounded-md'>
           <p className='text-black text-sm mb-3'>{msg}:</p>
           <div className='bg-white p-2 rounded-md'>
@@ -37,11 +37,11 @@ const SelectChat = ({chat, submitFunc}) => {
               })
             }
           </div>
-          <div className='flex justify-center'>
+          {/* <div className='flex justify-center'>
             <button onClick={() => submitFunc(selectedItems)} className='px-3 mt-2 py-1 bg-white text-lime-600 rounded-md'>
               submit
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
