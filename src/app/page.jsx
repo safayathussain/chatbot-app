@@ -8,6 +8,8 @@ import SelectChat from './components/SelectChat';
 import YesNoChat from './components/YesNoChat';
 import { useEffect, useRef, useState } from 'react';
 export default function Home() {
+  const [liked, setLiked] = useState(false)
+  const [disliked, setDisliked] = useState(false)
   const [chats, setChats] = useState([])
   const [myChatsCount, setMyChatsCount] = useState(0)
   const [msgInput, setMsgInput] = useState('')
@@ -100,7 +102,7 @@ export default function Home() {
   return (
     <div className='bg-gray-100 w-screen h-screen overflow-hidden'>
       <div className='max-w-[500px] mx-auto bg-white h-screen'>
-        <TopBar />
+        <TopBar liked={liked} disliked={disliked} setDisliked={setDisliked} setLiked={setLiked} />
         {/* chat track */}
         <div ref={chatTrackRef} className='p-5 overflow-y-scroll h-[calc(100vh-200px)]'>
           {/* time */}
