@@ -83,7 +83,9 @@ export default function Home() {
     if (myChatsCount < 11) {
       getResponse('', staticQues[myChatsCount])
       if (myChatsCount === 4) {
+
         setTimeout(() => {
+          setMyChatsCount(myChatsCount + 1)
           setChats(prevChats => {
             const newChats = [...prevChats, {
               msg: 'Select your issues',
@@ -98,8 +100,9 @@ export default function Home() {
         }, 500);
       }
       if (myChatsCount === 3) {
-        setTimeout(() => {
 
+        setTimeout(() => {
+          setMyChatsCount(myChatsCount + 1)
           setChats(prevChats => {
             const newChats = [...prevChats, {
               msg: 'Select your issues',
@@ -112,8 +115,9 @@ export default function Home() {
         }, 500);
       }
       if (myChatsCount === 8) {
-        setTimeout(() => {
 
+        setTimeout(() => {
+          setMyChatsCount(myChatsCount + 1)
           setChats(prevChats => {
             const newChats = [...prevChats, {
               msgType: 'yesNo',
@@ -129,11 +133,15 @@ export default function Home() {
   }
   const handleSelectInput = (items) => {
     console.log(items)
+    sendChat(items.join(', '))
     // getResponse('yesNo')
   }
   const handleYesNoInput = (data) => {
     console.log(data)
-    // getResponse('select')
+    sendChat(data ? 'Yes' : 'No')
+  }
+  const handleRangeFunc = (value) => {
+    sendChat(value)
   }
   useEffect(() => {
     // Scroll to the bottom when messages change
@@ -185,7 +193,7 @@ export default function Home() {
               } else if (chat.msgType === 'yesNo') {
                 return <YesNoChat key={i} submitFunc={handleYesNoInput} />
               } else if (chat.msgType === 'range') {
-                return <RangeChat key={i} chat={chat} />
+                return <RangeChat submitFunc={handleRangeFunc} key={i} chat={chat} />
               } else {
                 return <Chat key={i} chat={chat} />
               }
@@ -218,7 +226,10 @@ export default function Home() {
                 <hr />
                 <div className='flex items-center '>
                   <input type="text" value={msgInput} onChange={(e) => setMsgInput(e.target.value)} name="" id="" className='p-3 w-full bg-gray-200 focus:outline-none text-gray-600' placeholder='Write a message' />
-                  <PiPaperPlaneRightFill color='#2563eb' size={30} className='mr-7' onClick={() => sendChat(msgInput)} />
+                  <button onClick={() => sendChat(msgInput)} disabled={msgInput === ''}>
+                  <PiPaperPlaneRightFill color='#2563eb' size={30} className='mr-7'  />
+
+                  </button>
                 </div>
                 <hr />
               </div>

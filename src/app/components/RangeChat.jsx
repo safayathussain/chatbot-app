@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { FaArrowCircleRight } from "react-icons/fa";
 
-const RangeChat = () => {
+const RangeChat = ({ submitFunc }) => {
+    const [value, setValue] = useState(0)
+    const [submitted, setSubmitted] = useState(false)
     return (
         <div className='flex justify-end'>
             <div className='bg-lime-500 rounded-md w-max max-w-[250px] p-3 mt-3'>
@@ -12,7 +15,19 @@ const RangeChat = () => {
                         10
                     </div>
                 </div>
-                <input type="range" min={0} max={10} step={1} />
+                <input type="range" disabled={submitted} onChange={(e) => setValue(e.target.value)} value={value} min={0} max={10} step={1} />
+                {
+                    !submitted &&
+                    <div className='flex justify-end'>
+                        <p onClick={() => {
+                            submitFunc(value)
+                            setSubmitted(true)
+                        }} className='text-white'>
+                            <FaArrowCircleRight size={20} />
+                        </p>
+
+                    </div>
+                }
             </div>
         </div>
     )

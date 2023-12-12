@@ -1,20 +1,22 @@
 import React, { useState } from 'react'
+import { FaArrowCircleRight } from 'react-icons/fa';
 
-const SelectChat = ({chat, submitFunc}) => {
+const SelectChat = ({ chat, submitFunc }) => {
   const { msg, options, auth } = chat;
   const [selectedItems, setSelectedItems] = useState([]);
-
+  const [submitted, setSubmitted] = useState(false)
   const handleCheckboxChange = (event) => {
     const value = event.target.name;
     const isChecked = event.target.checked;
     setSelectedItems((prevSelectedItems) => {
       if (isChecked) {
-        return [...prevSelectedItems, value]; 
+        return [...prevSelectedItems, value];
       } else {
         return prevSelectedItems.filter((item) => item !== value);
       }
     });
   };
+
   return (
     <div>
       <div className={`mt-5 flex justify-end`}>
@@ -26,7 +28,7 @@ const SelectChat = ({chat, submitFunc}) => {
                 return <>
                   <div className="relative flex items-start w-full my-1">
                     <div className="flex items-center h-5">
-                      <input onChange={handleCheckboxChange} id={item.replace(' ', '')} name={item} type="checkbox" className="border-gray-200 rounded disabled:opacity-50 " />
+                      <input disabled={submitted} onChange={handleCheckboxChange} id={item.replace(' ', '')} name={item} type="checkbox" className="border-gray-200 rounded disabled:opacity-50 " />
                     </div>
                     <label htmlFor={item.replace(' ', '')} className="ms-2 block w-full text-sm text-black">
                       {item}
@@ -37,6 +39,17 @@ const SelectChat = ({chat, submitFunc}) => {
               })
             }
           </div>
+          {
+            !submitted &&
+            <div className='flex justify-end mt-2'>
+              <p onClick={() => {
+                submitFunc(selectedItems)
+                setSubmitted(true)
+              }} className='text-white'>
+                <FaArrowCircleRight size={20} />
+              </p>
+            </div>
+          }
           {/* <div className='flex justify-center'>
             <button onClick={() => submitFunc(selectedItems)} className='px-3 mt-2 py-1 bg-white text-lime-600 rounded-md'>
               submit
