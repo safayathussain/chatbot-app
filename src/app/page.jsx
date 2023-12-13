@@ -9,6 +9,7 @@ import YesNoChat from './components/YesNoChat';
 import { useEffect, useRef, useState } from 'react';
 import RangeChat from './components/RangeChat';
 import FileInput from './components/FileInput';
+import toast, { Toaster } from 'react-hot-toast';
 export default function Home() {
   const [liked, setLiked] = useState(false)
   const [disliked, setDisliked] = useState(false)
@@ -232,7 +233,7 @@ export default function Home() {
           {
             myChatsCount === 11 &&
             <div className='flex mb-2 mt-10 justify-center'>
-              <button className='text-sm px-2 py-1 rounded-sm bg-gray-300 text-black'>Submit</button>
+              <button className='text-sm px-5 py-2 rounded-md bg-gray-200 text-md text-black' onClick={() => toast.success('Submitted your information')}>Submit</button>
             </div>
           }
           {
@@ -253,6 +254,7 @@ export default function Home() {
           }
         </div>
       </div>
+      <div><Toaster/></div>
     </div>
   )
 }
