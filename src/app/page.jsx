@@ -8,6 +8,7 @@ import SelectChat from './components/SelectChat';
 import YesNoChat from './components/YesNoChat';
 import { useEffect, useRef, useState } from 'react';
 import RangeChat from './components/RangeChat';
+import FileInput from './components/FileInput';
 export default function Home() {
   const [liked, setLiked] = useState(false)
   const [disliked, setDisliked] = useState(false)
@@ -90,7 +91,7 @@ export default function Home() {
             const newChats = [...prevChats, {
               msg: 'Select your issues',
               msgType: 'select',
-              options: ['Domestic Abuse', 'Divorce & separation'],
+              options: ['Domestic Abuse', 'Divorce & separation', 'Child Abduction & Protection', 'Financial Disputes & Settlement', 'Inheritance & Pre-marital Agreement', 'Adoption & Childcare', 'Surrogacy', 'Legal Aid & Other'],
               // options,
               auth: 'ai'
             }];
@@ -122,6 +123,20 @@ export default function Home() {
             const newChats = [...prevChats, {
               msgType: 'yesNo',
               msg: 'please select yes or no',
+              auth: 'me'
+            }];
+            return newChats;
+          });
+        }, 500);
+      }
+      if (myChatsCount === 10) {
+
+        setTimeout(() => {
+          setMyChatsCount(myChatsCount + 1)
+          setChats(prevChats => {
+            const newChats = [...prevChats, {
+              msgType: 'file',
+              msg: 'Select a file',
               auth: 'me'
             }];
             return newChats;
@@ -173,7 +188,7 @@ export default function Home() {
     </>
   }
   return (
-    <div className='bg-gray-100 w-screen h-screen overflow-hidden'>
+    <div className='bg-gray-100 w-screen h-screen !overflow-hidden'>
       <div className='max-w-[500px] mx-auto bg-white h-screen'>
         <TopBar liked={liked} disliked={disliked} setDisliked={setDisliked} setLiked={setLiked} />
         {/* chat track */}
@@ -194,6 +209,8 @@ export default function Home() {
                 return <YesNoChat key={i} submitFunc={handleYesNoInput} />
               } else if (chat.msgType === 'range') {
                 return <RangeChat submitFunc={handleRangeFunc} key={i} chat={chat} />
+              } else if (chat.msgType === 'file') {
+                return <FileInput key={i} chat={chat} />
               } else {
                 return <Chat key={i} chat={chat} />
               }
@@ -213,13 +230,13 @@ export default function Home() {
             })
           } */}
           {
-            myChatsCount === 12 &&
+            myChatsCount === 11 &&
             <div className='flex mb-2 mt-10 justify-center'>
               <button className='text-sm px-2 py-1 rounded-sm bg-gray-300 text-black'>Submit</button>
             </div>
           }
           {
-            myChatsCount === 12 ? <div className='text-black p-5 text-center bg-gray-200 fixed bottom-0 max-w-[500px] -ml-5 w-full'>
+            myChatsCount === 11 ? <div className='text-black p-5 text-center bg-gray-200 fixed bottom-0 max-w-[500px] -ml-5 w-full'>
               Powered by Team17
             </div> :
               <div className='fixed bottom-4 bg-gray-200 -ml-5 w-full max-w-[500px] '>
