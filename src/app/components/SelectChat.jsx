@@ -5,16 +5,12 @@ const SelectChat = ({ chat, submitFunc }) => {
   const { msg, options, auth } = chat;
   const [selectedItems, setSelectedItems] = useState([]);
   const [submitted, setSubmitted] = useState(false)
+  const [selectedBox, setSelectedBox] = useState('')
   const handleCheckboxChange = (event) => {
     const value = event.target.name;
     const isChecked = event.target.checked;
-    setSelectedItems((prevSelectedItems) => {
-      if (isChecked) {
-        return [...prevSelectedItems, value];
-      } else {
-        return prevSelectedItems.filter((item) => item !== value);
-      }
-    });
+    setSelectedItems([value]);
+    setSelectedBox(value)
   };
 
   return (
@@ -24,16 +20,16 @@ const SelectChat = ({ chat, submitFunc }) => {
           <p className='text-black text-sm mb-3'>{msg}:</p>
           <div className='bg-white p-2 rounded-md'>
             {
-              options.map(item => {
+              options.map((item, i) => {
                 return <>
-                  <div className="relative flex items-start w-full my-1">
+                  <form  key={i} className="relative flex items-start w-full my-1">
                     <div className="flex items-center h-5">
-                      <input disabled={submitted} onChange={handleCheckboxChange} id={item.replace(' ', '')} name={item} type="checkbox" className="border-gray-200 rounded disabled:opacity-50 " />
+                      <input disabled={submitted} onChange={handleCheckboxChange} id={item.replace(' ', '')} name={item} checked={selectedBox === item} type="checkbox" className="border-gray-200 rounded disabled:opacity-50 " />
                     </div>
                     <label htmlFor={item.replace(' ', '')} className="ms-2 block w-full text-sm text-black">
                       {item}
                     </label>
-                  </div>
+                  </form>
                   <hr />
                 </>
               })

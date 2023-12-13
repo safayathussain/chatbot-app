@@ -10,30 +10,97 @@ import { useEffect, useRef, useState } from 'react';
 import RangeChat from './components/RangeChat';
 import FileInput from './components/FileInput';
 import toast, { Toaster } from 'react-hot-toast';
+let selectedIssue = '';
 export default function Home() {
   const [liked, setLiked] = useState(false)
   const [disliked, setDisliked] = useState(false)
   const [chats, setChats] = useState([])
   const [myChatsCount, setMyChatsCount] = useState(0)
   const [msgInput, setMsgInput] = useState('')
+  // const [selectedIssue, setSelectedIssue] = useState('')
   const chatTrackRef = useRef(null);
+  const ques = {
+    DomesticAbuse: {
+      ques: [
+        'What is the annual salary of each party involved, this should include all bonuses and other revenue sources?',
+        'Were there any financial responsibilities that were assigned to each party? If so, were they fulfilled?',
+        'Were there or are there any joint accounts ?',
+        'Please provide more information to help us better understand your situation.',
+        'Please attach any relevant images or files.'
+      ]
+    },
+    DivorceSeparation: {
+      ques: [
+        'What is the annual salary of each party involved, this should include all bonuses and other revenue sources?',
+        'Were there any financial responsibilities that were assigned to each party? If so, were they fulfilled?',
+        'Were there or are there any joint accounts ?',
+        'Please provide more information to help us better understand your situation.',
+        'Please attach any relevant images or files.'
+      ]
+    },
+    ChildAbductionProtection: {
+      ques: [
+        'What is the annual salary of each party involved, this should include all bonuses and other revenue sources?',
+        'Were there any financial responsibilities that were assigned to each party? If so, were they fulfilled?',
+        'Were there or are there any joint accounts ?',
+        'Please provide more information to help us better understand your situation.',
+        'Please attach any relevant images or files.'
+      ]
+    },
+    FinancialDisputesSettlement: {
+      ques: [
+        'What is the annual salary of each party involved, this should include all bonuses and other revenue sources?',
+        'Were there any financial responsibilities that were assigned to each party? If so, were they fulfilled?',
+        'Were there or are there any joint accounts ?',
+        'Please provide more information to help us better understand your situation.',
+        'Please attach any relevant images or files.'
+      ]
+    },
+    InheritancePreMaritalAgreement: {
+      ques: [
+        'What is the annual salary of each party involved, this should include all bonuses and other revenue sources?',
+        'Were there any financial responsibilities that were assigned to each party? If so, were they fulfilled?',
+        'Were there or are there any joint accounts ?',
+        'Please provide more information to help us better understand your situation.',
+        'Please attach any relevant images or files.'
+      ]
+    },
+    AdoptionChildcare: {
+      ques: [
+        'What is the annual salary of each party involved, this should include all bonuses and other revenue sources?',
+        'Were there any financial responsibilities that were assigned to each party? If so, were they fulfilled?',
+        'Were there or are there any joint accounts ?',
+        'Please provide more information to help us better understand your situation.',
+        'Please attach any relevant images or files.'
+      ]
+    },
+    Surrogacy: {
+      ques: [
+        'What is the annual salary of each party involved, this should include all bonuses and other revenue sources?',
+        'Were there any financial responsibilities that were assigned to each party? If so, were they fulfilled?',
+        'Were there or are there any joint accounts ?',
+        'Please provide more information to help us better understand your situation.',
+        'Please attach any relevant images or files.'
+      ]
+    },
+    LegalAidOther: {
+      ques: [
+        'What is the annual salary of each party involved, this should include all bonuses and other revenue sources?',
+        'Were there any financial responsibilities that were assigned to each party? If so, were they fulfilled?',
+        'Were there or are there any joint accounts ?',
+        'Please provide more information to help us better understand your situation.',
+        'Please attach any relevant images or files.'
+      ]
+    }
+  }
   const staticQues = [
     'What is your date of birth?',
     'Can you provide a safe telephone number ?',
     'Can you provide a safe email address ?',
     'Please use the slider to select priority.',
     'Please select which sectors of law your issue pertains to',
-    'Briefly explain the breakdown of assets and liabilities of both parties.',
-    'What is the annual salary of each party involved, this should include all bonuses and other revenue sources?',
-    'Were there any financial responsibilities that were assigned to each party? If so, were they fulfilled?',
-    'Were there or are there any joint accounts ?',
-    'Please provide more information to help us better understand your situation.',
-    'Please attach any relevant images or files.'
   ]
   const getResponse = (type, msg = '', options = []) => {
-    if (myChatsCount === 5) {
-
-    }
     setTimeout(() => {
       if (type === 'yesNo') {
         setChats(prevChats => {
@@ -55,7 +122,6 @@ export default function Home() {
           }];
           return newChats;
         });
-
       } else {
         setChats(prevChats => {
           const newChats = [...prevChats, {
@@ -81,11 +147,18 @@ export default function Home() {
     // } else {
     //   getResponse()
     // }
+    if (myChatsCount < 10) {
+      if (myChatsCount < 5) {
+        getResponse('', staticQues[myChatsCount])
+      } else {
+        if (selectedIssue) {
+          getResponse('', ques[selectedIssue].ques[myChatsCount - 5])
+        }
 
-    if (myChatsCount < 11) {
-      getResponse('', staticQues[myChatsCount])
+      }
+    console.log('jo', myChatsCount)
+
       if (myChatsCount === 4) {
-
         setTimeout(() => {
           setMyChatsCount(myChatsCount + 1)
           setChats(prevChats => {
@@ -93,7 +166,6 @@ export default function Home() {
               msg: 'Select your issues',
               msgType: 'select',
               options: ['Domestic Abuse', 'Divorce & separation', 'Child Abduction & Protection', 'Financial Disputes & Settlement', 'Inheritance & Pre-marital Agreement', 'Adoption & Childcare', 'Surrogacy', 'Legal Aid & Other'],
-              // options,
               auth: 'ai'
             }];
             return newChats;
@@ -116,7 +188,7 @@ export default function Home() {
           });
         }, 500);
       }
-      if (myChatsCount === 8) {
+      if (myChatsCount === 7) {
 
         setTimeout(() => {
           setMyChatsCount(myChatsCount + 1)
@@ -130,7 +202,7 @@ export default function Home() {
           });
         }, 500);
       }
-      if (myChatsCount === 10) {
+      if (myChatsCount === 9) {
 
         setTimeout(() => {
           setMyChatsCount(myChatsCount + 1)
@@ -147,9 +219,50 @@ export default function Home() {
       console.log(myChatsCount)
     }
   }
+
   const handleSelectInput = (items) => {
-    console.log(items)
-    sendChat(items.join(', '))
+    const issues = [
+      {
+        title: 'Domestic Abuse',
+        tag: 'DomesticAbuse'
+      },
+      {
+        title: 'Divorce & separation',
+        tag: 'DivorceSeparation'
+      },
+      {
+        title: 'Child Abduction & Protection',
+        tag: 'ChildAbductionProtection'
+      },
+      {
+        title: 'Financial Disputes & Settlement',
+        tag: 'FinancialDisputesSettlement'
+      },
+      {
+        title: 'Inheritance & Pre-marital Agreement',
+        tag: 'InheritancePreMaritalAgreement'
+      },
+      {
+        title: 'Adoption & Childcare',
+        tag: 'AdoptionChildcare'
+      },
+      {
+        title: 'Surrogacy',
+        tag: 'Surrogacy'
+      },
+      {
+        title: 'Legal Aid & Other',
+        tag: 'LegalAidOther'
+      },
+    ]
+    issues.map(issue => {
+      if (issue.title === items[0]) {
+        selectedIssue = issue.tag
+        console.log(selectedIssue, 'hlw')
+      }
+    })
+    setMyChatsCount(myChatsCount + 1)
+    sendChat(items[0])
     // getResponse('yesNo')
   }
   const handleYesNoInput = (data) => {
@@ -231,13 +344,13 @@ export default function Home() {
             })
           } */}
           {
-            myChatsCount === 11 &&
+            myChatsCount === 10 &&
             <div className='flex mb-2 mt-10 justify-center'>
               <button className='text-sm px-5 py-2 rounded-md bg-gray-200 text-md text-black' onClick={() => toast.success('Submitted your information')}>Submit</button>
             </div>
           }
           {
-            myChatsCount === 11 ? <div className='text-black p-5 text-center bg-gray-200 fixed bottom-0 max-w-[500px] -ml-5 w-full'>
+            myChatsCount === 10 ? <div className='text-black p-5 text-center bg-gray-200 fixed bottom-0 max-w-[500px] -ml-5 w-full'>
               Powered by Team17
             </div> :
               <div className='fixed bottom-4 bg-gray-200 -ml-5 w-full max-w-[500px] '>
@@ -245,7 +358,7 @@ export default function Home() {
                 <div className='flex items-center '>
                   <input type="text" value={msgInput} onChange={(e) => setMsgInput(e.target.value)} name="" id="" className='p-3 w-full bg-gray-200 focus:outline-none text-gray-600' placeholder='Write a message' />
                   <button onClick={() => sendChat(msgInput)} disabled={msgInput === ''}>
-                  <PiPaperPlaneRightFill color='#2563eb' size={30} className='mr-7'  />
+                    <PiPaperPlaneRightFill color='#2563eb' size={30} className='mr-7' />
 
                   </button>
                 </div>
@@ -254,7 +367,7 @@ export default function Home() {
           }
         </div>
       </div>
-      <div><Toaster/></div>
+      <div><Toaster /></div>
     </div>
   )
 }
