@@ -22,74 +22,74 @@ export default function Home() {
   const ques = {
     DomesticAbuse: {
       ques: [
-        'What is the annual salary of each party involved, this should include all bonuses and other revenue sources?',
-        'Were there any financial responsibilities that were assigned to each party? If so, were they fulfilled?',
-        'Were there or are there any joint accounts ?',
-        'Please provide more information to help us better understand your situation.',
+        'Has your partner ever told you how to dress or how to spend your money?',
+        'Has your partner ever threatened you or harmed you? If so, please provide details below.',
+        'Do you have any safety concerns? If so, please dial 999.',
+        'Have there been past instances of domestic abuse? If yes, have you reported it?',
         'Please attach any relevant images or files.'
       ]
     },
     DivorceSeparation: {
       ques: [
-        'What is the annual salary of each party involved, this should include all bonuses and other revenue sources?',
-        'Were there any financial responsibilities that were assigned to each party? If so, were they fulfilled?',
-        'Were there or are there any joint accounts ?',
-        'Please provide more information to help us better understand your situation.',
+        'What are the primary grounds for filing for divorce or separation?',
+        'Are there any children involved? If so, are there any desired custody arrangements?',
+        'Would you be open to negotiation or other resolution options?',
+        'What assets and debts collectively belong to the marital estate?',
         'Please attach any relevant images or files.'
       ]
     },
     ChildAbductionProtection: {
       ques: [
-        'What is the annual salary of each party involved, this should include all bonuses and other revenue sources?',
-        'Were there any financial responsibilities that were assigned to each party? If so, were they fulfilled?',
-        'Were there or are there any joint accounts ?',
+        'Are there any concerns for the safety of the child?',
+        'Do you have any witnesses?',
+        'Are there any parenting agreements or custody orders at present?',
         'Please provide more information to help us better understand your situation.',
         'Please attach any relevant images or files.'
       ]
     },
     FinancialDisputesSettlement: {
       ques: [
+        'Briefly explain the breakdown of assets and liabilities of both parties.',
         'What is the annual salary of each party involved, this should include all bonuses and other revenue sources?',
+        'Were there or are there any joint accounts?',
         'Were there any financial responsibilities that were assigned to each party? If so, were they fulfilled?',
-        'Were there or are there any joint accounts ?',
-        'Please provide more information to help us better understand your situation.',
         'Please attach any relevant images or files.'
       ]
     },
     InheritancePreMaritalAgreement: {
       ques: [
-        'What is the annual salary of each party involved, this should include all bonuses and other revenue sources?',
-        'Were there any financial responsibilities that were assigned to each party? If so, were they fulfilled?',
-        'Were there or are there any joint accounts ?',
-        'Please provide more information to help us better understand your situation.',
+        'Have you discussed pre-marital agreement or inheritance with your spouse?',
+        'Have you maintained all legal documents relating to inheritance or copies of the pre-marital agreement?',
+        'Have you previously consulted with legal professionals regarding your predicament?',
+        'Do you have any children? If so, have you considered all provisions in the pre-marital agreement or inheritance distribution?',
         'Please attach any relevant images or files.'
       ]
     },
     AdoptionChildcare: {
       ques: [
-        'What is the annual salary of each party involved, this should include all bonuses and other revenue sources?',
-        'Were there any financial responsibilities that were assigned to each party? If so, were they fulfilled?',
-        'Were there or are there any joint accounts ?',
-        'Please provide more information to help us better understand your situation.',
+        'What is the condition of your adoption or childcare?',
+        'What legal steps need to be taken for the finalisation of the adoption or child-care?',
+        'Have you completed the necessary legal documentation?',
+        'Can you provide some background information? This should include any medical records, social and psychological history.',
         'Please attach any relevant images or files.'
       ]
     },
     Surrogacy: {
       ques: [
-        'What is the annual salary of each party involved, this should include all bonuses and other revenue sources?',
-        'Were there any financial responsibilities that were assigned to each party? If so, were they fulfilled?',
-        'Were there or are there any joint accounts ?',
-        'Please provide more information to help us better understand your situation.',
+        'Have the prospective parents and the surrogate undertaken the necessary medical and psychological testing?',
+        'Have there been any arrangements made to compensate for the surrogate which will cover related expenses.',
+        'Do you have alternative plans in place in case of unforeseen circumstances or future conflicts?',
+        'If necessary, how may the surrogates parental rights be terminated?',
         'Please attach any relevant images or files.'
       ]
     },
     LegalAidOther: {
       ques: [
-        'What is the annual salary of each party involved, this should include all bonuses and other revenue sources?',
-        'Were there any financial responsibilities that were assigned to each party? If so, were they fulfilled?',
-        'Were there or are there any joint accounts ?',
-        'Please provide more information to help us better understand your situation.',
-        'Please attach any relevant images or files.'
+       'Can you briefly describe the legal matter for which you are seeking assistance?',
+       'To determine your eligibility for legal aid, could you provide a general overview of your financial situation?',
+       'Have you previously consulted any legal professionals regarding this matter?',
+       'Please provide more information to help us better understand your situation.',
+       'Please attach any relevant images or files.'
       ]
     }
   }
@@ -97,7 +97,7 @@ export default function Home() {
     'What is your date of birth?',
     'Can you provide a safe telephone number ?',
     'Can you provide a safe email address ?',
-    'Please use the slider to select priority.',
+    'Please use the slider to select the days emergency deadline .',
     'Please select which sectors of law your issue pertains to',
   ]
   const getResponse = (type, msg = '', options = []) => {
