@@ -12,10 +12,10 @@ const RangeChat = ({ submitFunc }) => {
                         1
                     </div>
                     <div>
-                        10
+                        30
                     </div>
                 </div>
-                <input type="range" disabled={submitted} onChange={(e) => setValue(e.target.value)} value={value} min={0} max={10} step={1} />
+                <input type="range" disabled={submitted} onChange={(e) => setValue(e.target.value)} value={value} min={0} max={30} step={1} />
                 {
                     !submitted &&
                     <div className='flex justify-end'>
