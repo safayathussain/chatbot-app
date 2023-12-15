@@ -97,7 +97,7 @@ export default function Home() {
     'What is your date of birth?',
     'Can you provide a safe telephone number ?',
     'Can you provide a safe email address ?',
-    'Please use the slider to select the days emergency deadline .',
+    'Please use the slider to select the deadline .',
     'Please select which sectors of law your issue pertains to',
   ]
   const getResponse = (type, msg = '', options = []) => {
