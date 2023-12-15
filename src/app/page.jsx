@@ -83,7 +83,7 @@ export default function Home() {
         'Please attach any relevant images or files.'
       ]
     },
-    LegalAidOther: {
+    LegalAid: {
       ques: [
        'Can you briefly describe the legal matter for which you are seeking assistance?',
        'To determine your eligibility for legal aid, could you provide a general overview of your financial situation?',
@@ -251,8 +251,12 @@ export default function Home() {
         tag: 'Surrogacy'
       },
       {
-        title: 'Legal Aid & Other',
-        tag: 'LegalAidOther'
+        title: 'Legal Aid ',
+        tag: 'LegalAid'
+      },
+      {
+        title: 'Other ',
+        tag: 'Other'
       },
     ]
     issues.map(issue => {
