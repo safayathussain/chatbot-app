@@ -165,7 +165,7 @@ export default function Home() {
             const newChats = [...prevChats, {
               msg: 'Select your issues',
               msgType: 'select',
-              options: ['Domestic Abuse', 'Divorce & separation', 'Child Abduction & Protection', 'Financial Disputes & Settlement', 'Inheritance & Pre-marital Agreement', 'Adoption & Childcare', 'Surrogacy', 'Legal Aid & Other'],
+              options: ['Domestic Abuse', 'Divorce & separation', 'Child Abduction & Protection', 'Financial Disputes & Settlement', 'Inheritance & Pre-marital Agreement', 'Adoption & Childcare', 'Surrogacy', 'Legal Aid', 'Other'],
               auth: 'ai'
             }];
             return newChats;
