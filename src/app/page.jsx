@@ -165,7 +165,7 @@ export default function Home() {
             const newChats = [...prevChats, {
               msg: 'Select your issues',
               msgType: 'select',
-              options: ['Domestic Abuse', 'Divorce & separation', 'Child Abduction & Protection', 'Financial Disputes & Settlement', 'Inheritance & Pre-marital Agreement', 'Adoption & Childcare', 'Surrogacy', 'Legal Aid', 'Other'],
+              options: ['Domestic Abuse', 'Divorce & separation', 'Child Abduction & Protection', 'Financial Disputes & Settlement', 'Inheritance & Pre-marital Agreement', 'Adoption & Childcare', 'Surrogacy', 'Legal Aid & Other'],
               auth: 'ai'
             }];
             return newChats;
@@ -251,12 +251,8 @@ export default function Home() {
         tag: 'Surrogacy'
       },
       {
-        title: 'Legal Aid ',
-        tag: 'LegalAid'
-      },
-      {
-        title: 'Other ',
-        tag: 'Other'
+        title: 'Legal Aid & Other ',
+        tag: 'LegalAid&Other'
       },
     ]
     issues.map(issue => {
