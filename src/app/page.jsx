@@ -83,7 +83,7 @@ export default function Home() {
         'Please attach any relevant images or files.'
       ]
     },
-    LegalAidOther: {
+    LegalAid: {
       ques: [
        'Can you briefly describe the legal matter for which you are seeking assistance?',
        'To determine your eligibility for legal aid, could you provide a general overview of your financial situation?',
@@ -165,7 +165,7 @@ export default function Home() {
             const newChats = [...prevChats, {
               msg: 'Select your issues',
               msgType: 'select',
-              options: ['Domestic Abuse', 'Divorce & separation', 'Child Abduction & Protection', 'Financial Disputes & Settlement', 'Inheritance & Pre-marital Agreement', 'Adoption & Childcare', 'Surrogacy', 'Legal Aid & Other'],
+              options: ['Domestic Abuse', 'Divorce & separation', 'Child Abduction & Protection', 'Financial Disputes & Settlement', 'Inheritance & Pre-marital Agreement', 'Adoption & Childcare', 'Surrogacy', 'Legal Aid', 'Other'],
               auth: 'ai'
             }];
             return newChats;
@@ -251,8 +251,8 @@ export default function Home() {
         tag: 'Surrogacy'
       },
       {
-        title: 'Legal Aid & Other ',
-        tag: 'LegalAidOther'
+        title: 'Legal Aid',
+        tag: 'LegalAid'
       },
     ]
     issues.map(issue => {
